@@ -1,0 +1,10 @@
+FRAME_RATE = 30  # Frames per second
+TIME_FOR_1_FRAME = 1 / FRAME_RATE  # Seconds
+
+PISTOL_STEP = 10
+
+WASP_SPAWN_INTERVAL = 1.2  # Seconds
+WASP_SPEED = 3.5
+
+LASER_LENGTH = 20
+LASER_SPEED = 20
