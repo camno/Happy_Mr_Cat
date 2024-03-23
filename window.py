@@ -19,7 +19,7 @@ def remove_sprite(sprite, sprite_list, window):
 
 window = turtle.Screen()
 window.tracer(0)
-window.setup(0.5, 0.75)
+window.setup(0.3, 0.8)
 window.bgcolor(0.2, 0.2, 0.2)
 window.title("The little wasps")
 

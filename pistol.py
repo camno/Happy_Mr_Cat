@@ -13,15 +13,14 @@ def pistol():
 
 def draw_pistol():
     pistol.clear()
-    pistol.turtlesize(1, 4)  # Base
-    pistol.stamp()
-    pistol.sety(FLOOR_LEVEL + 10)
-    pistol.turtlesize(1, 1.5)  # Next tier
-    pistol.stamp()
-    pistol.sety(FLOOR_LEVEL + 20)
-    pistol.turtlesize(0.8, 0.3)  # Tip of pistol
+
+    pistol.turtlesize(4, 1)  # Base
     pistol.stamp()
     pistol.sety(FLOOR_LEVEL)
+
+    pistol.turtlesize(4.2, 0.3)  # Tip of pistol
+    pistol.stamp()
+    pistol.sety(FLOOR_LEVEL - 10)
 
 
 def move_left():
