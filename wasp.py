@@ -6,7 +6,8 @@ wasps = []
 def create_wasp(wasps):
     wasp = turtle.Turtle()
     wasp.penup()
-    wasp.turtlesize(1.5)
+    this_size = random.randint(1, 5)
+    wasp.turtlesize(this_size)
     wasp.setposition(
         random.randint(
             int(LEFT + GUTTER),

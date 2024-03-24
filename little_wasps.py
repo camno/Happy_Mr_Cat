@@ -1,5 +1,5 @@
 # author: camno
-# v0.3
+# v0.4
 import random
 import time
 import turtle
@@ -28,6 +28,7 @@ draw_pistol()
 wasp_timer = 0
 game_timer = time.time()
 score = 0
+level = 0
 game_running = True
 restart = False
 init = True
@@ -71,7 +72,7 @@ while game_running:
     time_elapsed = time.time() - game_timer
     text.clear()
     text.write(
-        f"Time: {time_elapsed:5.1f}s \nScore: {score:5}",
+        f"Time: {time_elapsed:5.1f}s \nScore: {score:5} \nLevel: {level:5}",
         font=("Courier", 20, "bold"),
     )
     # Move pistol
@@ -87,11 +88,12 @@ while game_running:
             remove_sprite(laser, lasers, window)
             break
         # Check for collision with wasps
-        for wasp in wasps.copy():
-            if laser.distance(wasp) < 20:
+        for wasp in wasps.copy():           
+            if laser.distance(wasp) < 25:
                 remove_sprite(laser, lasers, window)
                 remove_sprite(wasp, wasps, window)
-                score += 1
+                score += int(wasp.shapesize()[0]) 
+                level = score // 100
                 break
     # Spawn new wasps when time interval elapsed
     if time.time() - wasp_timer > WASP_SPAWN_INTERVAL:
@@ -122,11 +124,9 @@ while game_running:
 
     if restart == True:
         # remove all wasps for a restart
-        print("total wasps ", len(wasps))
         for wasp in wasps.copy():
             remove_sprite(wasp, wasps, window)
         # clear the flying lasers in the field
-        print("total lasers ", len(lasers))
         for laser in lasers.copy():
             remove_sprite(laser, lasers, window)
             
