@@ -7,7 +7,10 @@ from pistol import *
 from wasp import *
 from laser import *
 from window import *
-from parameter import PISTOL_STEP, WASP_SPAWN_INTERVAL, WASP_SPEED, TIME_FOR_1_FRAME
+from drops import *
+from enhance import *
+from parameter import *
+
 
 # Create turtle for writing text
 text = turtle.Turtle()
@@ -27,11 +30,17 @@ draw_pistol()
 # Game loop
 wasp_timer = 0
 game_timer = time.time()
+pal_timer = 0
 score = 0
-level = 0
+level = 1
 game_running = True
 restart = False
 init = True
+
+# enhance flags
+mini_pals_on = False
+through = False
+
 while init:
     welcome.clear()
     welcome.write(
@@ -75,31 +84,69 @@ while game_running:
         f"Time: {time_elapsed:5.1f}s \nScore: {score:5} \nLevel: {level:5}",
         font=("Courier", 20, "bold"),
     )
+    
     # Move pistol
     new_x = pistol.xcor() + PISTOL_STEP * pistol.pistol_movement
     if LEFT + GUTTER <= new_x <= RIGHT - GUTTER:
         pistol.setx(new_x)
         draw_pistol()
+        # Move pals
+        if mini_pals_on:
+            draw_pals(pistol)
+    
     # Move all lasers
     for laser in lasers.copy():
+
         move_laser(laser)
-        # Remove laser if it goes off screen
+
+        # Remove laser if it goes off the screen
         if laser.ycor() > TOP:
             remove_sprite(laser, lasers, window)
             break
+
         # Check for collision with wasps
         for wasp in wasps.copy():           
             if laser.distance(wasp) < 25:
+                # laser hit the wasp, 10% drop rate for enhance itemsn default
+                if random.random() < DROP_RATE:
+                    create_drop(wasp)
                 remove_sprite(laser, lasers, window)
                 remove_sprite(wasp, wasps, window)
                 score += int(wasp.shapesize()[0]) 
-                level = score // 100
+                level = score // 100 + 1 
                 break
+
     # Spawn new wasps when time interval elapsed
     if time.time() - wasp_timer > WASP_SPAWN_INTERVAL:
         create_wasp(wasps)
         wasp_timer = time.time()
 
+    # remove mini pals when the time limit is reached
+    if mini_pals_on and (time.time() - pal_timer > EFFECT_TIME_LIMIT):
+        remove_mini_pals(pals, window)
+        mini_pals_on = False  
+
+    # Move all the drops
+    for drop in drops:
+        drop.forward(DROP_SPEED)
+        # Remove drop if it goes off the screen
+        if drop.ycor() < BOTTOM:
+            remove_sprite(drop, drops, window)
+            break 
+        # check whether succefully collecting the drop item
+        if drop.distance(pistol) < 25:
+            # get the type of drops based on the turtle shape
+            drop_shape = drop.shape()
+            if drop_shape == "triangle" and mini_pals_on == False: # drop item 1: summon mini guns 
+                create_mini_pals(pistol, pals)
+                mini_pals_on = True 
+                pal_timer = time.time()
+
+            remove_sprite(drop, drops, window)
+            
+            break 
+
+    
     # Move all wasps
     for wasp in wasps:
         wasp.forward(WASP_SPEED)

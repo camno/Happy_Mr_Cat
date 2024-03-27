@@ -1,5 +1,6 @@
 import turtle
 from window import FLOOR_LEVEL
+from enhance import pals
 
 # Create laser pistol
 def pistol():
@@ -25,14 +26,26 @@ def draw_pistol():
 
 def move_left():
     pistol.pistol_movement = -1
+    # if there's mini pals around, move them as well
+    if pals:
+        for pal in pals:
+            pal.pistol_movement = -1
 
 
 def move_right():
     pistol.pistol_movement = 1
+    # if there's mini pals around, move them as well
+    if pals:
+        for pal in pals:
+            pal.pistol_movement = 1
 
 
 def stop_pistol_movement():
     pistol.pistol_movement = 0
+    # if there's mini pals around, move them as well
+    if pals:
+        for pal in pals:
+            pal.pistol_movement = 0
 
 # create pistol
 pistol = pistol()
