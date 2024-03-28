@@ -38,7 +38,21 @@ def create_laser():
             lasers.append(laser)
 
 
-
+    if fanning and len(pals) == 0:
+            degrees = [-5, 5]
+            for i in range(2):
+                laser = turtle.Turtle()
+                laser.penup()
+                laser.color(1, 0, 0)
+                laser.hideturtle()
+                laser.setposition(pistol.xcor(), pistol.ycor())
+                laser.setheading(90 + degrees[i])
+                # Move laser to just above pistol tip
+                laser.forward(20)
+                # Prepare to draw the laser
+                laser.pendown()
+                laser.pensize(5)
+                lasers.append(laser)
 
 
 def move_laser(laser):

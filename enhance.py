@@ -5,6 +5,7 @@ from window import LEFT, GUTTER, RIGHT, TOP, FLOOR_LEVEL
 
 pals = []
 adjustments = [-20, 20]
+fanning =  []
 def create_mini_pals(pistol, pals):
     for i in range(2):
         pal = turtle.Turtle()

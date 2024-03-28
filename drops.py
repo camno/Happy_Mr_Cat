@@ -21,7 +21,7 @@ def create_drop(wasp):
     drop.setposition(pos)
 
     # each type has equal probability to appear
-    dtype = random.randint(1, 1)
+    dtype = random.randint(1, 4)
     if dtype == 1:
         drop.shape("triangle")
         drop.color("Salmon")

@@ -13,7 +13,7 @@ LASER_SPEED = 20
 
 # drop item parameters 
 DROP_SPEED = 7 
-DROP_RATE = 0.1 
+DROP_RATE = 0.1
 
 # the time limit of the drop item's effect
-EFFECT_TIME_LIMIT = 20
+EFFECT_TIME_LIMIT = 5

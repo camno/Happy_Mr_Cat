@@ -16,9 +16,7 @@ Developing plans
         - can't coexist with mini_pals
     - laser bomb v0.8 
         -  a big bomb that clears all the wasps on the screen at once
-- STAGE 5: periodic bosses v0.9
-    - boss shows up every 100 points
-    - beat the boss to proceed
+- STAGE 5: increase wasp respawn frequency when game level increases v0.9
 - STAGE 6: potential updates on minor issues and optimizations v1.0
     - increase the wasps density every 100 points
 - STAGE 7: ongoing improvement

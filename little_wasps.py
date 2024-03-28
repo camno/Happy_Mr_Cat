@@ -1,5 +1,5 @@
 # author: camno
-# v0.4
+# v0.8
 import random
 import time
 import turtle
@@ -30,7 +30,13 @@ draw_pistol()
 # Game loop
 wasp_timer = 0
 game_timer = time.time()
+
+# effect timers 
 pal_timer = 0
+through_timer = 0
+fanning_timer = 0
+
+#
 score = 0
 level = 1
 game_running = True
@@ -107,10 +113,11 @@ while game_running:
         # Check for collision with wasps
         for wasp in wasps.copy():           
             if laser.distance(wasp) < 25:
-                # laser hit the wasp, 10% drop rate for enhance itemsn default
+                # laser hit the wasp, 10% drop rate for enhance items(default)
                 if random.random() < DROP_RATE:
                     create_drop(wasp)
-                remove_sprite(laser, lasers, window)
+                if through == False:
+                    remove_sprite(laser, lasers, window)
                 remove_sprite(wasp, wasps, window)
                 score += int(wasp.shapesize()[0]) 
                 level = score // 100 + 1 
@@ -121,10 +128,19 @@ while game_running:
         create_wasp(wasps)
         wasp_timer = time.time()
 
-    # remove mini pals when the time limit is reached
+    # remove effects when the time limit is reached
+    # mini pals
     if mini_pals_on and (time.time() - pal_timer > EFFECT_TIME_LIMIT):
         remove_mini_pals(pals, window)
-        mini_pals_on = False  
+        mini_pals_on = False
+    
+    # through effect
+    if through == True and (time.time() - through_timer > EFFECT_TIME_LIMIT):
+        through = False
+    
+    # fanning out effect wear off
+    if fanning and (time.time() - fanning_timer > EFFECT_TIME_LIMIT):
+        fanning.pop()
 
     # Move all the drops
     for drop in drops:
@@ -141,6 +157,17 @@ while game_running:
                 create_mini_pals(pistol, pals)
                 mini_pals_on = True 
                 pal_timer = time.time()
+            elif drop_shape == "circle" and through == False: # drop item 2: enable the laser to go through wasps
+                through = True
+                through_timer = time.time()
+            elif drop_shape == "square" and not fanning: # drop item 3: fanning out the lasers
+                fanning.append(True)
+                fanning_timer = time.time()
+            elif drop_shape == "classic": # drop item 4: bomb out all the wasps on screen at once
+                for wasp in wasps.copy():
+                    score += int(wasp.shapesize()[0]) 
+                    level = score // 100 + 1
+                    remove_sprite(wasp, wasps, window)
 
             remove_sprite(drop, drops, window)
             
