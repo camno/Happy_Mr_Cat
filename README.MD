@@ -23,4 +23,4 @@ Try using the following
  ```   $ brew install python-tk```
 
 # Gameplay screenshots
-![alt text](img/image.png)
+![alt text](img/gameplay.png)
