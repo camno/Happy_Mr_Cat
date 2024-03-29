@@ -50,7 +50,7 @@ through = False
 while init:
     welcome.clear()
     welcome.write(
-        f"Welcome dear farmer, \nplease select your encounter now!\n\n\nNormal(n)         Hard(h)",
+        f"Welcome Happy Mr. Cat, \nplease select your encounter now!\n\n\nNormal(n)         Hard(h)",
         font=("Courier", 24, "bold"),
     )
     
@@ -112,14 +112,23 @@ while game_running:
 
         # Check for collision with wasps
         for wasp in wasps.copy():           
-            if laser.distance(wasp) < 25:
+            if laser.distance(wasp) < 50:
                 # laser hit the wasp, 10% drop rate for enhance items(default)
                 if random.random() < DROP_RATE:
                     create_drop(wasp)
                 if through == False:
                     remove_sprite(laser, lasers, window)
                 remove_sprite(wasp, wasps, window)
-                score += int(wasp.shapesize()[0]) 
+                # score depends on wasp types
+                if wasp.shape() == "img/wasp0.gif":
+                    score += 1
+                elif wasp.shape() == "img/wasp1.gif":
+                    score += 2
+                elif wasp.shape() == "img/wasp2.gif":
+                    score += 3
+                else:
+                    score += 4
+
                 level = score // 100 + 1 
                 break
 
@@ -153,17 +162,17 @@ while game_running:
         if drop.distance(pistol) < 25:
             # get the type of drops based on the turtle shape
             drop_shape = drop.shape()
-            if drop_shape == "triangle" and mini_pals_on == False: # drop item 1: summon mini guns 
+            if drop_shape == "img/mini_pals.gif" and mini_pals_on == False: # drop item 1: summon mini guns 
                 create_mini_pals(pistol, pals)
                 mini_pals_on = True 
                 pal_timer = time.time()
-            elif drop_shape == "circle" and through == False: # drop item 2: enable the laser to go through wasps
+            elif drop_shape == "img/through.gif" and through == False: # drop item 2: enable the laser to go through wasps
                 through = True
                 through_timer = time.time()
-            elif drop_shape == "square" and not fanning: # drop item 3: fanning out the lasers
+            elif drop_shape == "img/fanning.gif" and not fanning: # drop item 3: fanning out the lasers
                 fanning.append(True)
                 fanning_timer = time.time()
-            elif drop_shape == "classic": # drop item 4: bomb out all the wasps on screen at once
+            elif drop_shape == "img/bomb.gif": # drop item 4: bomb out all the wasps on screen at once
                 for wasp in wasps.copy():
                     score += int(wasp.shapesize()[0]) 
                     level = score // 100 + 1

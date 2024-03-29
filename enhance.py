@@ -4,14 +4,14 @@ from window import LEFT, GUTTER, RIGHT, TOP, FLOOR_LEVEL
 
 
 pals = []
-adjustments = [-20, 20]
+adjustments = [-50, 50]
 fanning =  []
 def create_mini_pals(pistol, pals):
     for i in range(2):
         pal = turtle.Turtle()
         pal.penup()
         pal.color(1, 1, 1)
-        pal.shape('square')
+        pal.shape('img/mini_pal.gif')
         pal.turtlesize(1, 1)
         pal.pistol_movement = 0 # -1, 0 or 1 for left, stationary, right
         pal.setposition(pistol.xcor() + adjustments[i], FLOOR_LEVEL)

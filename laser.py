@@ -18,7 +18,7 @@ def create_laser():
     laser.forward(20)
     # Prepare to draw the laser
     laser.pendown()
-    laser.pensize(5)
+    laser.pensize(4)
 
     lasers.append(laser)
     
@@ -26,7 +26,7 @@ def create_laser():
         for pal in pals:
             laser = turtle.Turtle()
             laser.penup()
-            laser.color(1, 0, 0)
+            laser.color(0.988, 0.98, 0.812)
             laser.hideturtle()
             laser.setposition(pal.xcor(), pal.ycor())
             laser.setheading(90)

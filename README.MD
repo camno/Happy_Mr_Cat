@@ -1,4 +1,5 @@
-You are a nice farmer working on your field, but there's a swarm of wasps charging at you for no reason. 
+You are Happy Mr. Cat, working on your field, but there's a swarm of wasps charging at you for no reason. 
+
 But, fortunately, you have a laser gun at your hand. Now, defend yourself against those insects!
 
 # How to run it
@@ -21,3 +22,6 @@ Try using the following
 
  ```   $ brew install python-tk```
 
+# Gameplay screenshots
+![alt text](img/gameplay_1.png)
+![alt text](img/gameplay_2.png)

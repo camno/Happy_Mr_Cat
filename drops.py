@@ -23,17 +23,13 @@ def create_drop(wasp):
     # each type has equal probability to appear
     dtype = random.randint(1, 4)
     if dtype == 1:
-        drop.shape("triangle")
-        drop.color("Salmon")
+        drop.shape("img/mini_pals.gif")
     elif dtype == 2:
-        drop.shape("circle")
-        drop.color("SpringGreen")
+        drop.shape("img/through.gif")
     elif dtype == 3:
-        drop.shape("square")
-        drop.color("DeepSkyBlue")
+        drop.shape("img/fanning.gif")
     else:
-        drop.shape("classic")
-        drop.color("AliceBlue")
+        drop.shape("img/bomb.gif")
 
     drop.setheading(-90)
     drops.append(drop)

@@ -3,13 +3,10 @@ import random
 from window import LEFT, GUTTER, RIGHT, TOP
 
 
-# turtle.register_shape("wasp", "wasp.gif")
 wasps = []
 def create_wasp(wasps):
     wasp = turtle.Turtle()
     wasp.penup()
-    this_size = random.randint(1, 4)
-    wasp.turtlesize(this_size)
     wasp.setposition(
         random.randint(
             int(LEFT + GUTTER),
@@ -17,7 +14,17 @@ def create_wasp(wasps):
         ),
         TOP,
     )
-    wasp.shape("turtle")
+    # random wasp types
+    wtype = random.randint(1, 4)
+    if wtype == 1:
+        wasp.shape("img/wasp0.gif")
+    elif wtype == 2:
+        wasp.shape("img/wasp1.gif")
+    elif wtype == 3:
+        wasp.shape("img/wasp2.gif")
+    else:
+        wasp.shape("img/wasp3.gif")
+
     wasp.setheading(-90)
     wasp.color(random.random(), random.random(), random.random())
     wasps.append(wasp)

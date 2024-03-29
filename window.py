@@ -1,4 +1,5 @@
-import turtle     
+import turtle
+from tkinter import PhotoImage    
 
 def boundaries(window):
     LEFT = -window.window_width() / 2
@@ -22,5 +23,22 @@ window.tracer(0)
 window.setup(0.3, 0.8)
 window.bgcolor(0.2, 0.2, 0.2)
 window.title("The little wasps")
+
+# register wasps shapes
+window.register_shape('img/wasp0.gif')
+window.register_shape('img/wasp1.gif')
+window.register_shape('img/wasp2.gif')
+window.register_shape('img/wasp3.gif')
+# register drop items shapes
+window.register_shape('img/mini_pals.gif') # item 1
+window.register_shape('img/through.gif') # item 2
+window.register_shape('img/fanning.gif') # item 3
+window.register_shape('img/bomb.gif') # item 4
+
+# register laser gun 
+window.register_shape('img/cat_gun.gif')
+
+# register mini pal
+window.register_shape('img/mini_pal.gif')
 
 LEFT, RIGHT, TOP, BOTTOM, FLOOR_LEVEL, GUTTER = boundaries(window)
