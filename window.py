@@ -22,7 +22,8 @@ window = turtle.Screen()
 window.tracer(0)
 window.setup(0.3, 0.8)
 window.bgcolor(0.2, 0.2, 0.2)
-window.title("The little wasps")
+window.bgpic('img/background.gif')
+window.title("Happy Mr. Cat")
 
 # register wasps shapes
 window.register_shape('img/wasp0.gif')

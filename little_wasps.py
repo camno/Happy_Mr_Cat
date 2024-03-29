@@ -1,6 +1,7 @@
 # author: camno
-# v0.8
+# v1.0
 import random
+from math import exp
 import time
 import turtle
 from pistol import *
@@ -119,7 +120,7 @@ while game_running:
                 if through == False:
                     remove_sprite(laser, lasers, window)
                 remove_sprite(wasp, wasps, window)
-                # score depends on wasp types
+                # score depends on wasp typesq
                 if wasp.shape() == "img/wasp0.gif":
                     score += 1
                 elif wasp.shape() == "img/wasp1.gif":
@@ -133,7 +134,7 @@ while game_running:
                 break
 
     # Spawn new wasps when time interval elapsed
-    if time.time() - wasp_timer > WASP_SPAWN_INTERVAL:
+    if time.time() - wasp_timer > (WASP_SPAWN_INTERVAL / level):
         create_wasp(wasps)
         wasp_timer = time.time()
 
@@ -185,7 +186,19 @@ while game_running:
     
     # Move all wasps
     for wasp in wasps:
-        wasp.forward(WASP_SPEED)
+
+        # each kind of wasp has its own speed
+        # speed depends on the wasp type and game level
+        if wasp.shape() == "img/wasp0.gif":
+            speed_factor = 1 * (level/100 + 1)**float(level)
+        elif wasp.shape() == "img/wasp1.gif":
+            speed_factor = 1.1 * (level/100 + 1)**float(level)
+        elif wasp.shape() == "img/wasp3.gif":
+            speed_factor = 1.2 * (level/100 + 1)**float(level)
+        elif wasp.shape() == "img/wasp4.gif":
+            speed_factor = 1.4 * (level/100 + 1)**float(level)
+
+        wasp.forward(WASP_SPEED * speed_factor)
         # Check for game over
         if wasp.ycor() < FLOOR_LEVEL:
 
